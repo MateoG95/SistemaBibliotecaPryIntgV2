@@ -12,7 +12,7 @@ public class Libro {
         this.isbn = isbn;
         this.titulo = titulo;
         this.genero = genero;
-        this.año = anio;
+        this.anio = anio;
         this.autor = autor;
         this.disponible = true;
     }
@@ -30,7 +30,7 @@ public class Libro {
     }
 
     public void setAño(int anio) {
-        this.año = anio;
+        this.anio = anio;
     }
 
     public void setAutor(Autor autor) {
@@ -68,6 +68,6 @@ public class Libro {
     @Override
     public String toString(){
         return "\nISBN: " + isbn + "\nTítulo: " + titulo + "\nGénero: " + genero +
-                "\nAño: " + año + "\nAutor: " + autor.getNombre() + "\nDisponible: " + disponible;
+                "\nAño: " + anio + "\nAutor: " + autor.getNombre() + "\nDisponible: " + disponible;
     }
 }
