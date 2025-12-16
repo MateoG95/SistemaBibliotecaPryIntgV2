@@ -7,14 +7,16 @@ public class Libro {
     private int anio;
     private Autor autor;
     private boolean disponible;
+    private String sucursal;
 
-    public Libro(String isbn, String titulo, String genero, int anio, Autor autor) {
+    public Libro(String isbn, String titulo, String genero, int anio, Autor autor, String sucursal) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.genero = genero;
         this.anio = anio;
         this.autor = autor;
         this.disponible = true;
+        this.sucursal = sucursal;
     }
 
     public void setIsbn(String isbn) {
@@ -29,7 +31,7 @@ public class Libro {
         this.genero = genero;
     }
 
-    public void setAño(int anio) {
+    public void setAnio(int anio) {
         this.anio = anio;
     }
 
@@ -39,6 +41,10 @@ public class Libro {
 
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
+    }
+
+    public void setSucursal(String sucursal) {
+        this.sucursal = sucursal;
     }
 
     public String getIsbn() {
@@ -65,9 +71,14 @@ public class Libro {
         return disponible;
     }
 
+    public String getSucursal() {
+        return sucursal;
+    }
+
     @Override
     public String toString(){
         return "\nISBN: " + isbn + "\nTítulo: " + titulo + "\nGénero: " + genero +
-                "\nAño: " + anio + "\nAutor: " + autor.getNombre() + "\nDisponible: " + disponible;
+                "\nAño: " + anio + "\nAutor: " + autor.getNombre() +
+                "\nDisponible: " + disponible + "\nSucursal: " + sucursal;
     }
 }

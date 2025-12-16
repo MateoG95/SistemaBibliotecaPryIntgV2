@@ -1,15 +1,21 @@
 package SistemaBiblio;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Prestamo {
     private String codigoPrestamo;
     private Usuario usuario;
     private Libro libro;
-    private String fechaPrestamo;
-    private String fechaDevolucion;
+    private LocalDate fechaPrestamo;
+    private LocalDate fechaDevolucion;
     private boolean devuelto;
     private double multa;
+    private String sucursal;
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public Prestamo(String codigoPrestamo, Usuario usuario, Libro libro, String fechaPrestamo, String fechaDevolucion) {
+    public Prestamo(String codigoPrestamo, Usuario usuario, Libro libro,
+                    LocalDate fechaPrestamo, LocalDate fechaDevolucion, String sucursal) {
         this.codigoPrestamo = codigoPrestamo;
         this.usuario = usuario;
         this.libro = libro;
@@ -17,6 +23,7 @@ public class Prestamo {
         this.fechaDevolucion = fechaDevolucion;
         this.devuelto = false;
         this.multa = 0.0;
+        this.sucursal = sucursal;
     }
 
     public void setCodigoPrestamo(String codigoPrestamo) {
@@ -31,11 +38,11 @@ public class Prestamo {
         this.libro = libro;
     }
 
-    public void setFechaPrestamo(String fechaPrestamo) {
+    public void setFechaPrestamo(LocalDate fechaPrestamo) {
         this.fechaPrestamo = fechaPrestamo;
     }
 
-    public void setFechaDevolucion(String fechaDevolucion) {
+    public void setFechaDevolucion(LocalDate fechaDevolucion) {
         this.fechaDevolucion = fechaDevolucion;
     }
 
@@ -45,6 +52,10 @@ public class Prestamo {
 
     public void setMulta(double multa) {
         this.multa = multa;
+    }
+
+    public void setSucursal(String sucursal) {
+        this.sucursal = sucursal;
     }
 
     public String getCodigoPrestamo() {
@@ -59,11 +70,11 @@ public class Prestamo {
         return libro;
     }
 
-    public String getFechaPrestamo() {
+    public LocalDate getFechaPrestamo() {
         return fechaPrestamo;
     }
 
-    public String getFechaDevolucion() {
+    public LocalDate getFechaDevolucion() {
         return fechaDevolucion;
     }
 
@@ -75,10 +86,22 @@ public class Prestamo {
         return multa;
     }
 
+    public String getSucursal() {
+        return sucursal;
+    }
+
     @Override
     public String toString(){
-        return "\nCódigo Préstamo: " + codigoPrestamo + "\nUsuario: " + usuario.getNombre() +
-                "\nLibro: " + libro.getTitulo() + "\nFecha Préstamo: " + fechaPrestamo +
-                "\nFecha Devolución: " + fechaDevolucion + "\nDevuelto: " + devuelto + "\nMulta: $" + multa;
+        String fechaPrestamoStr = fechaPrestamo.format(formatter);
+        String fechaDevolucionStr = fechaDevolucion.format(formatter);
+
+        return "\nCódigo Préstamo: " + codigoPrestamo +
+                "\nUsuario: " + usuario.getNombre() +
+                "\nLibro: " + libro.getTitulo() +
+                "\nFecha Préstamo: " + fechaPrestamoStr +
+                "\nFecha Devolución: " + fechaDevolucionStr +
+                "\nDevuelto: " + devuelto +
+                "\nMulta: $" + String.format("%.2f", multa) +
+                "\nSucursal: " + sucursal;
     }
 }

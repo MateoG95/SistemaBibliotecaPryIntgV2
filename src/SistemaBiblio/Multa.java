@@ -1,14 +1,18 @@
 package SistemaBiblio;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Multa {
     private String codigoMulta;
     private Usuario usuario;
-    private String fechaInicio;
-    private String fechaFin;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFin;
     private double monto;
     private String motivo;
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public Multa(String codigoMulta, Usuario usuario, String fechaInicio, String fechaFin, double monto, String motivo) {
+    public Multa(String codigoMulta, Usuario usuario, LocalDate fechaInicio, LocalDate fechaFin, double monto, String motivo) {
         this.codigoMulta = codigoMulta;
         this.usuario = usuario;
         this.fechaInicio = fechaInicio;
@@ -25,11 +29,11 @@ public class Multa {
         this.usuario = usuario;
     }
 
-    public void setFechaInicio(String fechaInicio) {
+    public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public void setFechaFin(String fechaFin) {
+    public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
 
@@ -49,11 +53,11 @@ public class Multa {
         return usuario;
     }
 
-    public String getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    public String getFechaFin() {
+    public LocalDate getFechaFin() {
         return fechaFin;
     }
 
@@ -67,8 +71,15 @@ public class Multa {
 
     @Override
     public String toString(){
-        return "\nCódigo Multa: " + codigoMulta + "\nUsuario: " + usuario.getNombre() +
-                "\nFecha Inicio: " + fechaInicio + "\nFecha Fin: " + fechaFin +
-                "\nMonto: $" + monto + "\nMotivo: " + motivo;
+        String fechaInicioStr = fechaInicio.format(formatter);
+        String fechaFinStr = fechaFin.format(formatter);
+
+        return "\nCódigo Multa: " + codigoMulta +
+                "\nUsuario: " + usuario.getNombre() +
+                "\nID Banner: " + usuario.getCodigoUsuario() +
+                "\nFecha Inicio: " + fechaInicioStr +
+                "\nFecha Fin: " + fechaFinStr +
+                "\nMonto: $" + String.format("%.2f", monto) +
+                "\nMotivo: " + motivo;
     }
 }
